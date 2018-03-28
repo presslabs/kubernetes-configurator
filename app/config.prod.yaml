@@ -1,0 +1,14 @@
+apiVersion: 'oxygen.presslabs.net/v1alpha1'
+kind: <%=type%>
+metadata:
+  name: <%=provider%>
+  database: <%=db%>
+spec:
+  phpPodTemplate: <%=name%>
+  phpVolumeClaimTemplate: '<%=wp_config.image%>'
+  phpServiceAnnotations: <%=wp_config.max_exec%>
+  cachePodTemplate: ~
+  cacheServiceAnnotations: []
+  databasePodTemplate: ~
+  databaseVolumeClaimTemplates: ~
+  databaseServiceAnnotations: []

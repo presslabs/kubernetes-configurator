@@ -1,0 +1,39 @@
+options:
+  formatter: stylish
+  max-warnings: 50
+files:
+  include: src/**/*.s+(a|c)ss
+rules:
+  class-name-format:
+    - 2
+    -
+      convention: hyphenatedlowercase
+  extends-before-mixins: 2
+  extends-before-declarations: 2
+  placeholder-in-extend: 2
+  mixins-before-declarations:
+    - 2
+    -
+      exclude: [breakpoint, mq]
+  no-warn: 1
+  no-debug: 1
+  no-ids: 1
+  no-important: 0
+  hex-notation:
+    - 2
+    -
+      style: uppercase
+  indentation:
+    - 2
+    -
+      size: 2
+  property-sort-order:
+    - 1
+    -
+      order: [display, margin]
+      ignore-custom-properties: true
+  space-after-colon: 2
+  variable-for-property:
+    - 1
+    -
+      properties: []

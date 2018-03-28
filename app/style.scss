@@ -1,0 +1,13 @@
+@import '~bulma';
+@import "~v-toaster/dist/v-toaster.css";
+
+$particles-font-path: "~presslabs-particles-icons/dist/fonts/" !default;
+@import "~presslabs-particles-icons";
+
+@import "components/variables";
+@import "components/colors";
+@import "components/prismjs";
+
+html {
+  background-color: whitesmoke;
+}

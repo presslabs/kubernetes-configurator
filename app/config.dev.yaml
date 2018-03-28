@@ -1,0 +1,46 @@
+apiVersion: 'oxygen.presslabs.net/v1alpha1'
+kind: <%=type%>
+metadata:
+  name: <%=provider%>
+  database: <%=db%>Gb
+spec:
+  # The controller creates a deployment consisting of pods with this spec
+  # for running the WordpressInstance. This is field is required.
+  phpPodTemplate: <%=name%>
+  # A PVC template for mounting content into runtime. The name is renamed so
+  # that it matches the WordpressInstance. This is made available to phpPodSpec
+  # as `content` volume. If not specified, an emptyDir volume is provided instead.
+  phpVolumeClaimTemplate: '<%=wp_config.image%>'
+  # Add these annotations for the PHP service
+  phpServiceAnnotations: <%=wp_config.max_exec%>
+
+  # If specified, the controller creates a StatetefulSet consisting of pods
+  # with this spec for object caching.
+  cachePodTemplate: ~
+  # Add these annotations for the object cache service
+  cacheServiceAnnotations: []
+
+  # If specified, the controller creates a StatetefulSet consisting of pods
+  # with this spec for database storage.
+  databasePodTemplate: ~
+  # The database StatetefulSet will have this set as volumeClaimTemplates.
+  databaseVolumeClaimTemplates: ~
+  # Add these service annotations for the mysql service
+  databaseServiceAnnotations: []
+---
+apiVersion: oxygen.presslabs.net/v1alpha1
+kind: WordpressInstance
+metadata:
+  name: mysite
+spec:
+  runtime:               # the runtime to use. If not specified, it will use the runtime named default
+  runtimeAnnotations: [] # set this set of annotations to the runtime pods
+  mainDomain:            # it must be FQDN, no wildcard accepted (for multisite the primary site domain should be used)
+                         # This gets set as "oxygen/main-domain" annotation on the runtime pod
+  additionalDomains: []  # these domains also serve traffic (eg. language domains or subdomains for multisite or just CDN domain)
+                         # This gets set as "oxygen/additional-domains" annotation on the runtime pod (the list is concatenated by comma)
+  httpsMode: 'http'      # (http|https|https-strict|dual).
+                         # This gets set as "oxygen/https-mode" annotation on the runtime pod
+  ingressAnnotations: [] # set this set of annotations on the created ingress
+  secretName: ~          # The secret "instance-secret" from runtime pods gets remapped to this
+  databaseSecretName: ~  # The secret "database-secret" from runtime pods gets remapped to this
