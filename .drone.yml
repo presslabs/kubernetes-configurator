@@ -25,6 +25,7 @@ pipeline:
     image: node:9.7.1
     pull: true
     commands:
+      - ls -la .
       - yarn
       - yarn build
     when:
