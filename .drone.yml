@@ -22,11 +22,11 @@ clone:
 
 pipeline:
   build:
-    image: node:8.9.4
+    image: node:9.7.1
     pull: true
-    group: build
     commands:
-      - make build
+      - yarn
+      - yarn build
     when:
       branch: master
 
